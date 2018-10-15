@@ -1,0 +1,1 @@
+this is a test file,just output this word.
