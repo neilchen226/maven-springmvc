@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry location="E:\cheng\newworkspace\ZMH\root\WEB-INF\lib\sqljdbc4.jar" />
+<!-- 	<classPathEntry location="D:\bao\sqljdbc4.jar" /> -->
+	<context id="context1">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+		connectionURL="jdbc:sqlserver://localhost:1433;DatabaseName=Test"
+			userId="sa" password="123456" />
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetProject="ZZZZ/src" targetPackage="net.kingtrans.test.pojo">
+			<property name="enableSubPackages" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的映射文件报名和位置 -->
+		<sqlMapGenerator targetProject="ZZZZ/src" targetPackage="net.kingtrans.test.dao">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetProject="ZZZZ/src" targetPackage="net.kingtrans.test.dao" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
+		<table tableName="Student" domainObjectName="Student"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+	 	</table>
+		<!-- <table  tableName="s_house_cost" domainObjectName="SHouseCost"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+		</table> -->
+		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
+		<!-- <table tableName="s_order_track" domainObjectName="SOrderTrack"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+		</table> -->
+	</context>
+</generatorConfiguration> 
