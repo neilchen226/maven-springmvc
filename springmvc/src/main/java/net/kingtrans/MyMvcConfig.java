@@ -14,16 +14,16 @@ import org.springframework.web.servlet.view.JstlView;
 import net.kingtrans.domain.DemoInterceptor;
 
 @Configuration
-@EnableWebMvc // 1
+@EnableWebMvc // 开启SpringMVC支持， 必须加该注解
 @EnableScheduling
 @ComponentScan("net.kingtrans")
-public class MyMvcConfig extends WebMvcConfigurerAdapter {// 2
+public class MyMvcConfig extends WebMvcConfigurerAdapter {// 继承该类配置SpringMVC
 
 	// 设置spring视图
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/classes/views/");
+		viewResolver.setPrefix("/WEB_INF/classes/views/");
 		viewResolver.setSuffix(".jsp");
 		viewResolver.setViewClass(JstlView.class);
 		return viewResolver;
@@ -33,7 +33,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {// 2
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-		registry.addResourceHandler("/res/**").addResourceLocations("classpath:/res/");// 3
+		registry.addResourceHandler("/env/**").addResourceLocations("classpath:/env/");// 3
 
 	}
 	//拦截器配置

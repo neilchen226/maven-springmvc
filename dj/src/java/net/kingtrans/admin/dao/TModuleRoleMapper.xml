@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.kingtrans.admin.dao.TModuleRoleMapper">
+	<resultMap id="BaseResultMap" type="net.kingtrans.admin.pojo.TModuleRole">
+		<id column="roleid" property="roleid" jdbcType="VARCHAR" />
+		<id column="moduleid" property="moduleid" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<delete id="deleteByRoleid" parameterType="java.lang.String">
+		delete from t_module_role
+		where roleid = #{roleid}
+	</delete>
+
+	<delete id="deleteByRoleids" parameterType="java.lang.String">
+		delete from t_module_role
+		where roleid in(
+		<foreach collection="roleid" item="item" separator=",">
+			#{item}
+		</foreach>
+		)
+	</delete>
+	<insert id="insert" parameterType="net.kingtrans.admin.pojo.TModuleRole">
+		insert into t_module_role (roleid, moduleid)
+		values
+		(#{roleid,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="initAdminRole">
+		insert into t_module_role (roleid, moduleid)
+		select 'admin',moduleid from t_module
+	</insert>
+	
+	<insert id="insertList" parameterType="java.util.List">
+		insert into t_module_role (roleid, moduleid) values
+		<foreach collection="list" item="item" separator="," close=";">
+			(#{item.roleid},#{item.moduleid})
+		</foreach>
+	</insert>
+</mapper>

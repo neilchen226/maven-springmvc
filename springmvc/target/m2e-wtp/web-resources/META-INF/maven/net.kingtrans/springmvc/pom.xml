@@ -163,8 +163,15 @@
 
 	<build>
 		<resources>
+
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+			</resource>
+
 			<resource>
 				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
 				<!-- 资源根目录排除各环境的配置，防止在生成目录中多余其它目录 -->
 				<excludes>
 					<exclude>/env/test/*</exclude>

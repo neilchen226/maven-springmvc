@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+.layui-input,.layui-select,.layui-textarea {
+	height: 30px;
+	max-width: 300px;
+}
+
+.layui-form-item {
+	margin-bottom: 5px;
+}
+
+.layui-form-label {
+	padding: 5px 15px;
+}
+.layui-form-mid{
+	padding: 5px 0 !important;	
+}
+
+.layui-colla-title-btn {
+	position: relative;
+	height: 0px;
+	line-height: 42px;
+	padding: 0 15px 0 35px;
+	color: #333;
+	background-color: #f2f2f2;
+	cursor: pointer;
+	font-size: 14px;
+	z-index: 99999;
+}
+
+.layui-colla-title-btn .layui-btn {
+	float: right;
+	margin: 5px 10px;
+}
+
+a:hover {
+	color: red;
+	font-weight: bold;
+}
+
+.layui-table-cell{
+	padding: 0 2px;	
+}
+
+.chooseLineClass{
+	background-color: #d0d0d0;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.kingtrans.admin.dao.TModuleMapper">
+	<resultMap id="BaseResultMap" type="net.kingtrans.admin.pojo.TModule">
+		<id column="moduleid" property="moduleid" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
+		<result column="href" property="href" jdbcType="VARCHAR" />
+		<result column="spread" property="spread" jdbcType="INTEGER" />
+		<result column="isleaf" property="isleaf" jdbcType="INTEGER" />
+		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
+		<result column="pos" property="pos" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		moduleid, title, icon, href, spread, isleaf, parentid, pos
+	</sql>
+
+	<delete id="deleteAll">
+		delete from t_module;
+	</delete>
+
+	<insert id="insert" parameterType="net.kingtrans.admin.pojo.TModule">
+		insert into t_module (moduleid, title, icon,
+		href, spread, isleaf, parentid,
+		pos, isindependent
+		)
+		values (#{moduleid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+		#{href,jdbcType=VARCHAR}, #{spread,jdbcType=INTEGER}, #{isleaf,jdbcType=INTEGER},
+		#{parentid,jdbcType=VARCHAR},
+		#{pos,jdbcType=INTEGER}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into t_module (moduleid, title, icon,
+		href, spread, isleaf, parentid,
+		pos
+		) values
+		<foreach collection="list" item="item" separator="," close=";">
+			(#{item.moduleid},#{item.title},#{item.icon},#{item.href},#{item.spread},#{item.isleaf},#{item.parentid},#{item.pos})
+		</foreach>
+	</insert>
+	
+</mapper>

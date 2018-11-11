@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- 注解配置 -->
+	<context:annotation-config />
+	<!-- controller注解扫描配置 -->
+	<context:component-scan base-package="net">
+		<!-- 不扫描service注解，该注解将在sping容器中生效，使之获得事务处理能力 -->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	<!-- 视图渲染器 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 如果当前请求为"/"时，则转发到"main" -->
+	<mvc:view-controller path="/" view-name="forward:main" />
+
+	<!-- 配置打开注解扫描 -->
+	<mvc:annotation-driven />
+
+	<!-- 对静态资源文件的访问 -->
+	<mvc:resources mapping="/resource/**" location="/resource/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
+	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为5MB -->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+	</bean>
+
+	<!-- 开启这个配置 spring才能识别@Scheduled注解 -->
+	<task:annotation-driven scheduler="qbScheduler"/>
+	<task:scheduler id="qbScheduler" pool-size="20" />
+
+	<!-- 拦截器 多个拦截器，顺序执行 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/api/**" />
+			<mvc:exclude-mapping path="/resource/**" />
+			<mvc:exclude-mapping path="/upload/**" />
+			<mvc:exclude-mapping path="/favicon.ico" />
+			<bean class="net.kingtrans.admin.interceptor.LogonInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	 <!-- spring 异常处理器 -->
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="/error/error" />
+		<property name="exceptionAttribute" value="ex" />
+	</bean>
+</beans>
+

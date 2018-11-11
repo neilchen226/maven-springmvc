@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.kingtrans.admin.dao.TLoggerMapper">
+	<resultMap id="BaseResultMap" type="net.kingtrans.admin.pojo.TLogger">
+		<id column="serialid" property="serialid" jdbcType="INTEGER" />
+		<result column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="logtype" property="logtype" jdbcType="INTEGER" />
+		<result column="editdate" property="editdate" jdbcType="VARCHAR" />
+		<result column="note" property="note" jdbcType="NVARCHAR" />
+		<result column="logip" property="logip" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		serialid, userid, logtype, editdate, note, logip
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_logger
+		where serialid = #{serialid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		t_logger
+		where serialid = #{serialid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="net.kingtrans.admin.pojo.TLogger">
+		insert into t_logger
+		( userid, logtype,
+		logip, editdate, note
+		)
+		values
+		(
+		#{userid,jdbcType=VARCHAR},
+		#{logtype,jdbcType=INTEGER},
+		#{logip,jdbcType=VARCHAR},
+		#{editdate,jdbcType=VARCHAR},
+		#{note,jdbcType=NVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="net.kingtrans.admin.pojo.TLogger">
+		insert into t_logger
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="logtype != null">
+				logtype,
+			</if>
+			<if test="logip != null">
+				logip,
+			</if>
+			<if test="editdate != null">
+				editdate,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="logtype != null">
+				#{logtype,jdbcType=INTEGER},
+			</if>
+			<if test="logip != null">
+				#{logip,jdbcType=VARCHAR},
+			</if>
+			<if test="editdate != null">
+				#{editdate,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=NVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="net.kingtrans.admin.pojo.TLogger">
+		update t_logger
+		<set>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="logtype != null">
+				logtype = #{logtype,jdbcType=INTEGER},
+			</if>
+			<if test="logip != null">
+				logip = #{logip,jdbcType=VARCHAR},
+			</if>
+			<if test="editdate != null">
+				editdate = #{editdate,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				note = #{note,jdbcType=NVARCHAR},
+			</if>
+		</set>
+		where serialid = #{serialid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="net.kingtrans.admin.pojo.TLogger">
+		update t_logger
+		set userid = #{userid,jdbcType=VARCHAR},
+		logtype =
+		#{logtype,jdbcType=INTEGER},
+		logip = #{logip,jdbcType=VARCHAR},
+		editdate = #{editdate,jdbcType=VARCHAR},
+		note =
+		#{note,jdbcType=NVARCHAR}
+		where serialid = #{serialid,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="getCountsByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+		select count(1) from t_logger
+		<where>
+			<if test="userid != null  and userid != ''">
+				and userid in (select userid from t_user where userid like '%' +#{userid} + '%' or username like '%'
+				+#{userid} + '%')
+			</if>
+			<if test="logtype != null  and logtype != ''">
+				and logtype = #{logtype}
+			</if>
+			<if test="createtime_start != null  and createtime_start != ''">
+				and editdate &gt; #{createtime_start}
+			</if>
+			<if test="createtime_end != null  and createtime_end != ''">
+				and editdate &lt; #{createtime_end}
+			</if>
+		</where>
+	</select>
+
+	<select id="getDatasByMap" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from(
+		select
+		ROW_NUMBER() OVER(Order by ${sortfield} ${sorttype} ) AS RowNumber,
+		<include refid="Base_Column_List" />
+		from t_logger
+		<where>
+			<if test="userid != null  and userid != ''">
+				and userid in (select userid from t_user where userid like '%' +#{userid} + '%' or username like '%'
+				+#{userid} + '%')
+			</if>
+			<if test="logtype != null  and logtype != ''">
+				and logtype = #{logtype}
+			</if>
+			<if test="createtime_start != null  and createtime_start != ''">
+				and editdate &gt; #{createtime_start}
+			</if>
+			<if test="createtime_end != null  and createtime_end != ''">
+				and editdate &lt; #{createtime_end}
+			</if>
+		</where>
+		) as b
+		<if test='searchPosition != null'>
+			where RowNumber between #{searchPosition} and
+			(#{searchPosition}+#{limit})
+		</if>
+	</select>
+
+	<delete id="deleteByPrimaryKeys" parameterType="java.lang.String">
+		delete from t_logger
+		where userid in(
+		<foreach collection="userid" item="item" separator=",">
+			#{item}
+		</foreach>
+		)
+	</delete>
+
+	<select id="selectByPrimaryKeys" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_logger
+		where userid = #{userid,jdbcType=INTEGER}
+	</select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/config"/>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="Junit"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-fileupload-1.3.1.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/db-druid-1.0.27.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/hamcrest-all-1.3.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/httpmime-4.5.2.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/j2ee-jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/json-ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/junit-4.12.jar" sourcepath="C:/Users/Cheng/AppData/Local/Temp/decompiler/source/junit-4.12-sources-1524562722628.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/log-log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/log-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/mybatis-3.2.7.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/mybatis-spring-1.3.0.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/QRCode.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/quartz-2.2.3.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/quartz-jobs-2.2.3.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-aop-3.2.11.RELEASE.jar" sourcepath="C:/Users/Cheng/AppData/Local/Temp/decompiler/source/spring-aop-3.2.11.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-aspects-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-beans-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-context-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-core-3.2.11.RELEASE.jar" sourcepath="C:/Users/Cheng/AppData/Local/Temp/decompiler/source/spring-core-3.2.11.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-expression-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-jdbc-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-test-3.2.11.RELEASE.jar" sourcepath="C:/Users/Cheng/AppData/Local/Temp/decompiler/source/spring-test-3.2.11.RELEASE-sources-1524562725204.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-tx-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-tx-aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-web-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/spring-webmvc-3.2.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/xom-1.1.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/xstream-1.3.1.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/mybatis-generator-core.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-ooxml-3.9.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-ooxml-schemas-3.9.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/jsoup-1.9.2.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/jbarcode-0.2.8.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/mysql-connector-java-5.1.34-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Library/Apache Tomcat/tomcat8080/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/Library/Apache Tomcat/tomcat8080/lib/servlet-api.jar"/>
+	<classpathentry kind="output" path="root/WEB-INF/classes"/>
+</classpath>

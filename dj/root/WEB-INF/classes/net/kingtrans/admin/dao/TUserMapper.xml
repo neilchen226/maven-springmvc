@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.kingtrans.admin.dao.TUserMapper">
+	<resultMap id="BaseResultMap" type="net.kingtrans.admin.pojo.TUser">
+		<id column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="userFace" property="userFace" jdbcType="VARCHAR" />
+		<result column="roleid" property="roleid" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		userid, password, username, userFace, roleid
+	</sql>
+
+	<select id="getUserCountsByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+		select count(1) from t_user tuser
+		left join t_role trole on tuser.roleid = trole.roleid
+		<where>
+			<if test="userid != null  and userid != ''">
+				and (
+				tuser.userid like '%'+#{userid}+'%'
+				or tuser.username like '%'+#{userid}+'%'
+				)
+			</if>
+			<if test="roleid != null and roleid != ''">
+				and tuser.roleid = #{roleid}
+			</if>
+		</where>
+	</select>
+	<select id="getUsersByMap" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+		trole.rolename as rolename,
+		trole.roledesc as roledesc,
+		tuser.userid, tuser.password, tuser.username, tuser.userFace, tuser.roleid
+		from
+		t_user tuser left join
+		t_role trole on tuser.roleid = trole.roleid
+		<where>
+			<if test="userid != null  and userid != ''">
+				and (
+				tuser.userid like '%'+#{userid}+'%'
+				or tuser.username like '%'+#{userid}+'%'
+				)
+			</if>
+			<if test="roleid != null and roleid != ''">
+				and tuser.roleid = #{roleid}
+			</if>
+		</where>
+		<if test='searchPosition != null'>
+			limit #{searchPosition}, #{searchPosition}+#{limit}
+		</if>
+	</select>
+	<select id="getTUsersByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		<where>
+			<if test="userid != null  and userid != ''">
+				and (
+				userid like '%'+#{userid}+'%'
+				or username like '%'+#{userid}+'%'
+				)
+			</if>
+			<if test="roleid != null and roleid != ''">
+				and roleid = #{roleid}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where userid = #{userid,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_user
+		where userid = #{userid,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insert" parameterType="net.kingtrans.admin.pojo.TUser">
+		insert into t_user
+		(userid, password, username, userFace, roleid)
+		values
+		(#{userid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR}, #{userFace,jdbcType=VARCHAR},
+		#{roleid,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertSelective" parameterType="net.kingtrans.admin.pojo.TUser">
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="userFace != null">
+				userFace,
+			</if>
+			<if test="roleid != null">
+				roleid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userFace != null">
+				#{userFace,jdbcType=VARCHAR},
+			</if>
+			<if test="roleid != null">
+				#{roleid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="net.kingtrans.admin.pojo.TUser">
+		update t_user
+		<set>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userFace != null">
+				userFace = #{userFace,jdbcType=VARCHAR},
+			</if>
+			<if test="roleid != null">
+				roleid = #{roleid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where userid = #{userid,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="net.kingtrans.admin.pojo.TUser">
+		update t_user
+		set password = #{password,jdbcType=VARCHAR},
+		username
+		= #{username,jdbcType=VARCHAR},
+		userFace = #{userFace,jdbcType=VARCHAR},
+		roleid =
+		#{roleid,jdbcType=VARCHAR}
+		where userid
+		= #{userid,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

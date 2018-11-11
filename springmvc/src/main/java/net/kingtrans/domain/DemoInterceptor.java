@@ -11,6 +11,8 @@ public class DemoInterceptor extends HandlerInterceptorAdapter {//1
 	@Override
 	public boolean preHandle(HttpServletRequest request, //2
 			HttpServletResponse response, Object handler) throws Exception {
+		String filePath=request.getServletContext().getRealPath("/");
+		System.out.println("filePath"+filePath);
 		long startTime = System.currentTimeMillis();
 		request.setAttribute("startTime", startTime);
 		return true;
