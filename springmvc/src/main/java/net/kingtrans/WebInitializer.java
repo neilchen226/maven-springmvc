@@ -12,8 +12,11 @@ public class WebInitializer implements WebApplicationInitializer {// 1
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
+		// 注解启动spring容器
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(MyMvcConfig.class);
+		// 设置spring容器的配置类为 MyMvcConfig.java
+		ctx.register(MyMvcConfig.class);// 
+		// 
 		ctx.setServletContext(servletContext); // 2
 
 		Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx)); // 3

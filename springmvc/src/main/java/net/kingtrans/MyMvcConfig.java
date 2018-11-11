@@ -19,6 +19,7 @@ import net.kingtrans.domain.DemoInterceptor;
 @ComponentScan("net.kingtrans")
 public class MyMvcConfig extends WebMvcConfigurerAdapter {// 2
 
+	// 设置spring视图
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
