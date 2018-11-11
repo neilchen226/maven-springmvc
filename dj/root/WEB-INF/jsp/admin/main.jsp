@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>中马航订单管理系统</title>
+	<title>Dajie订单管理系统</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -36,8 +36,8 @@
 		<div class="layui-header header">
 			<div class="layui-main mag0">
 				<a href="javascript:void(0);" class="logo">
-					<img src="/resource/zmh/img/logon.png" style="height: 48px; line-height: 60px;">
-					<span style="font-size: 24px;vertical-align: bottom; line-height: 60px;">中马航</span>
+					<img src="/resource/zmh/img/head.jpg" style="height: 48px; line-height: 60px;">
+					<span style="font-size: 24px;vertical-align: bottom; line-height: 60px;">Dajie</span>
 				</a>
 				<!-- 显示/隐藏左侧菜单 -->
 				<a href="javascript:void(0);" class="seraph hideMenu icon-caidan"></a>
@@ -103,7 +103,7 @@
 		</div>
 		<!-- 底部 -->
 		<div class="layui-footer footer" style="display:none;">
-			<p><span>&copy; 中马航 2018</span>　
+			<p><span>&copy; Dajie 2018</span>　
 		</div>
 	</div>
 

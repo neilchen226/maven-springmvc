@@ -112,8 +112,7 @@
 		select count(1) from t_logger
 		<where>
 			<if test="userid != null  and userid != ''">
-				and userid in (select userid from t_user where userid like '%' +#{userid} + '%' or username like '%'
-				+#{userid} + '%')
+				and userid in (select userid from t_user where userid like CONCAT('%', #{userid} , '%') or username like CONCAT('%', #{userid} , '%'))
 			</if>
 			<if test="logtype != null  and logtype != ''">
 				and logtype = #{logtype}
@@ -128,15 +127,12 @@
 	</select>
 
 	<select id="getDatasByMap" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from(
 		select
-		ROW_NUMBER() OVER(Order by ${sortfield} ${sorttype} ) AS RowNumber,
 		<include refid="Base_Column_List" />
 		from t_logger
 		<where>
 			<if test="userid != null  and userid != ''">
-				and userid in (select userid from t_user where userid like '%' +#{userid} + '%' or username like '%'
-				+#{userid} + '%')
+				and userid in (select userid from t_user where userid like CONCAT('%', #{userid} , '%') or username like CONCAT('%', #{userid} , '%'))
 			</if>
 			<if test="logtype != null  and logtype != ''">
 				and logtype = #{logtype}
@@ -148,10 +144,7 @@
 				and editdate &lt; #{createtime_end}
 			</if>
 		</where>
-		) as b
 		<if test='searchPosition != null'>
-			where RowNumber between #{searchPosition} and
-			(#{searchPosition}+#{limit})
 		</if>
 	</select>
 

@@ -27,10 +27,10 @@
 		from t_role
 		<where>
 			<if test="roleid != null">
-				and roleid like '%'+ #{roleid}+'%'
+				and roleid like CONCAT('%',#{roleid},'%')
 			</if>
 			<if test="rolename != null">
-				and rolename like '%'+ #{rolename} +'%'
+				and rolename like CONCAT('%',#{roleid},'%')
 			</if>
 		</where>
 	</select>

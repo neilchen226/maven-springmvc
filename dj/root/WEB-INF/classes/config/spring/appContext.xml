@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/aop   
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-	<!-- 中马航系统配置文件 -->
+	<!-- Dajie系统配置文件 -->
 	<bean id="zmhProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>

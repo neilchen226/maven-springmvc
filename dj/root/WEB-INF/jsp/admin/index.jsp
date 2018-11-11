@@ -68,7 +68,7 @@
 	<div class="layui-row">
 		<div style="float: left;">
 			<div style="margin: 10px 0;">
-				<span class="logonusername"></span> <span class="nowTime_01"></span> 欢迎进入中马航订单管理系统。
+				<span class="logonusername"></span> <span class="nowTime_01"></span> 欢迎进入Dajie订单管理系统。
 			</div>
 			<div style="margin: 10px 0;">
 				当前时间为：
