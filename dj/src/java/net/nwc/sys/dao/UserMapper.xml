@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.nwc.sys.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="net.nwc.sys.pojo.User">
+    <id column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userface" jdbcType="VARCHAR" property="userface" />
+    <result column="usernumber" jdbcType="VARCHAR" property="usernumber" />
+    <result column="jobname" jdbcType="VARCHAR" property="jobname" />
+    <result column="iswork" jdbcType="INTEGER" property="iswork" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, pass, username, userface, usernumber, jobname, iswork
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from suser
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUsernumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from suser
+    where usernumber = #{usernumber,jdbcType=VARCHAR}
+  </select>
+  <select id="geUserCountsByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select 
+    count(1)
+    from suser
+  	<where>
+  		<if test='username != null'>
+  		and  username LIKE CONCAT('%',#{username},'%')
+  		</if>
+  	</where>
+  </select>
+  <select id="geUsersByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from suser
+  	<where>
+  		<if test='username != null'>
+  		and  username LIKE CONCAT('%',#{username},'%')
+  		</if>
+  	</where>
+	<if test='sortfield != null'>
+		order by #{sortfield} #{sorttype}
+	</if>
+    limit #{searchPosition}, #{limit}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from suser
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="net.nwc.sys.pojo.User">
+    insert into suser (userid, pass, username, 
+      userface, usernumber, jobname, 
+      iswork)
+    values (#{userid,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userface,jdbcType=VARCHAR}, #{usernumber,jdbcType=VARCHAR}, #{jobname,jdbcType=VARCHAR}, 
+      #{iswork,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.nwc.sys.pojo.User">
+    insert into suser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="pass != null">
+        pass,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userface != null">
+        userface,
+      </if>
+      <if test="usernumber != null">
+        usernumber,
+      </if>
+      <if test="jobname != null">
+        jobname,
+      </if>
+      <if test="iswork != null">
+        iswork,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userface != null">
+        #{userface,jdbcType=VARCHAR},
+      </if>
+      <if test="usernumber != null">
+        #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="jobname != null">
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="iswork != null">
+        #{iswork,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.nwc.sys.pojo.User">
+    update suser
+    <set>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userface != null">
+        userface = #{userface,jdbcType=VARCHAR},
+      </if>
+      <if test="usernumber != null">
+        usernumber = #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="jobname != null">
+        jobname = #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="iswork != null">
+        iswork = #{iswork,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.nwc.sys.pojo.User">
+    update suser
+    set pass = #{pass,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userface = #{userface,jdbcType=VARCHAR},
+      usernumber = #{usernumber,jdbcType=VARCHAR},
+      jobname = #{jobname,jdbcType=VARCHAR},
+      iswork = #{iswork,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

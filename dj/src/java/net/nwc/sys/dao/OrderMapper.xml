@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.nwc.sys.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="net.nwc.sys.pojo.Order">
+    <id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="client" jdbcType="VARCHAR" property="client" />
+    <result column="projectname" jdbcType="VARCHAR" property="projectname" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="vmap" jdbcType="INTEGER" property="vmap" />
+    <result column="smap" jdbcType="INTEGER" property="smap" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="precost" jdbcType="DECIMAL" property="precost" />
+    <result column="paycost" jdbcType="DECIMAL" property="paycost" />
+    <result column="payway" jdbcType="VARCHAR" property="payway" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="editor" jdbcType="VARCHAR" property="editor" />
+    <result column="editdate" jdbcType="VARCHAR" property="editdate" />
+    <result column="checkdate" jdbcType="VARCHAR" property="checkdate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="isdelete" jdbcType="INTEGER" property="isdelete" />
+    <result column="deletedate" jdbcType="VARCHAR" property="deletedate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderid, client, projectname, userid, vmap, smap, cost, precost, paycost, payway, 
+    status, editor, editdate, checkdate, note, isdelete, deletedate
+  </sql>
+  <select id="getOrderCountsByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select count(1)
+    from sorder
+    <where>
+    	<if test="clients != null">
+    		<foreach collection="clients" open="and (" separator=" or " close=")" item="clientItem">
+    			client like CONCAT('%',#{clientItem},'%') or projectname like CONCAT('%',#{clientItem},'%')
+    		</foreach>
+    	</if>
+    	<if test="client != null">
+    		and (client like CONCAT('%',#{client},'%') or projectname like CONCAT('%',#{client},'%'))
+    	</if>
+    	<if test="userid != null">
+    		and userid = #{userid}
+    	</if>
+    	<if test="userids != null">
+    		<foreach collection="userids" open="and (" separator=" or " close=")" item="userItem">
+    			userid = #{userItem}
+    		</foreach>
+    	</if>
+    	<if test="payway != null">
+    		and payway  like CONCAT('%',#{payway},'%')
+    	</if>
+    	<if test="status != null">
+    		and status = #{status}
+    	</if>
+    	<if test="isdelete != null">
+    		and isdelete = #{isdelete}
+    	</if>
+    	<if test="startDate != null">
+    		and editdate &gt;= #{startDate}
+    	</if>
+    	<if test="endDate != null">
+    		and editdate &lt;= #{endDate}
+    	</if>
+    	<if test="deleteDate_start != null">
+    		and deletedate &gt;= #{deleteDate_start}
+    	</if>
+    	<if test="deleteDate_end != null">
+    		and deletedate &lt;= #{deleteDate_end}
+    	</if>
+    </where> 
+  </select>
+  
+  <select id="getOrderByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sorder
+    <where>
+    	<if test="clients != null">
+    		<foreach collection="clients" open="and (" separator=" or " close=")" item="clientItem">
+    			client like CONCAT('%',#{clientItem},'%') or projectname like CONCAT('%',#{clientItem},'%')
+    		</foreach>
+    	</if>
+    	<if test="client != null">
+    		and (client like CONCAT('%',#{client},'%') or projectname like CONCAT('%',#{client},'%'))
+    	</if>
+    	<if test="userid != null">
+    		and userid = #{userid}
+    	</if>
+    	<if test="userids != null">
+    		<foreach collection="userids" open="and (" separator=" or " close=")" item="userItem">
+    			userid = #{userItem}
+    		</foreach>
+    	</if>
+    	<if test="payway != null">
+    		and payway  like CONCAT('%',#{payway},'%')
+    	</if>
+    	<if test="status != null">
+    		and status = #{status}
+    	</if>
+    	<if test="isdelete != null">
+    		and isdelete = #{isdelete}
+    	</if>
+    	<if test="startDate != null">
+    		and editdate &gt;= #{startDate}
+    	</if>
+    	<if test="endDate != null">
+    		and editdate &lt;= #{endDate}
+    	</if>
+    	<if test="deleteDate_start != null">
+    		and deletedate &gt;= #{deleteDate_start}
+    	</if>
+    	<if test="deleteDate_end != null">
+    		and deletedate &lt;= #{deleteDate_end}
+    	</if>
+    </where> 
+    order by ${sortfield} ${sorttype} 
+    <if test="searchPosition != null">
+		limit #{searchPosition}, #{limit}
+  	</if>    
+  </select>
+  <select id="getOrderSum" parameterType="java.util.Map" resultType="java.util.Map">
+    select 
+    sum(vmap) as vmap,
+    sum(smap) as smap,
+    sum(cost) as cost,
+    sum(precost) as precost,
+    sum(paycost) as paycost
+    from sorder
+    <where>
+    
+    	<if test="clients != null">
+    		<foreach collection="clients" open="and (" separator=" or " close=")" item="clientItem">
+    			client like CONCAT('%',#{clientItem},'%') or projectname like CONCAT('%',#{clientItem},'%')
+    		</foreach>
+    	</if>
+    	<if test="client != null">
+    		and (client like CONCAT('%',#{client},'%') or projectname like CONCAT('%',#{client},'%'))
+    	</if>
+    	<if test="userid != null">
+    		and userid = #{userid}
+    	</if>
+    	<if test="userids != null">
+    		<foreach collection="userids" open="and (" separator=" or " close=")" item="userItem">
+    			userid = #{userItem}
+    		</foreach>
+    	</if>
+    	<if test="payway != null">
+    		and payway  like CONCAT('%',#{payway},'%')
+    	</if>
+    	<if test="status != null">
+    		and status = #{status}
+    	</if>
+    	<if test="isdelete != null">
+    		and isdelete = #{isdelete}
+    	</if>
+    	<if test="startDate != null">
+    		and editdate &gt;= #{startDate}
+    	</if>
+    	<if test="endDate != null">
+    		and editdate &lt;= #{endDate}
+    	</if>
+    	<if test="deleteDate_start != null">
+    		and deletedate &gt;= #{deleteDate_start}
+    	</if>
+    	<if test="deleteDate_end != null">
+    		and deletedate &lt;= #{deleteDate_end}
+    	</if>
+    </where> 
+    order by ${sortfield} ${sorttype} 
+    <if test="searchPosition != null">
+		limit #{searchPosition}, #{limit}
+  	</if>    
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sorder
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sorder
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.nwc.sys.pojo.Order" useGeneratedKeys="true" keyProperty="orderid">
+    insert into sorder (orderid, client, projectname, 
+      userid, vmap, smap, 
+      cost, precost, paycost, 
+      payway, status, editor, 
+      editdate, checkdate, note, isdelete, 
+      deletedate)
+    values (#{orderid,jdbcType=INTEGER}, #{client,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{vmap,jdbcType=INTEGER}, #{smap,jdbcType=INTEGER}, 
+      #{cost,jdbcType=DECIMAL}, #{precost,jdbcType=DECIMAL}, #{paycost,jdbcType=DECIMAL}, 
+      #{payway,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, 
+      #{editdate,jdbcType=VARCHAR}, #{checkdate,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+      #{isdelete,jdbcType=INTEGER}, #{deletedate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.nwc.sys.pojo.Order" useGeneratedKeys="true" keyProperty="orderid">
+    insert into sorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderid,
+      </if>
+      <if test="client != null">
+        client,
+      </if>
+      <if test="projectname != null">
+        projectname,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="vmap != null">
+        vmap,
+      </if>
+      <if test="smap != null">
+        smap,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="precost != null">
+        precost,
+      </if>
+      <if test="paycost != null">
+        paycost,
+      </if>
+      <if test="payway != null">
+        payway,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="editor != null">
+        editor,
+      </if>
+      <if test="editdate != null">
+        editdate,
+      </if>
+      <if test="checkdate != null and checkdate != ''">
+        checkdate,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="isdelete != null">
+        isdelete,
+      </if>
+      <if test="deletedate != null">
+        deletedate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="client != null">
+        #{client,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null">
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="vmap != null">
+        #{vmap,jdbcType=INTEGER},
+      </if>
+      <if test="smap != null">
+        #{smap,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="precost != null">
+        #{precost,jdbcType=DECIMAL},
+      </if>
+      <if test="paycost != null">
+        #{paycost,jdbcType=DECIMAL},
+      </if>
+      <if test="payway != null">
+        #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null">
+        #{editdate,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null and checkdate != ''">
+        #{checkdate,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null">
+        #{deletedate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.nwc.sys.pojo.Order">
+    update sorder
+    <set>
+      <if test="client != null">
+        client = #{client,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null">
+        projectname = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="vmap != null">
+        vmap = #{vmap,jdbcType=INTEGER},
+      </if>
+      <if test="smap != null">
+        smap = #{smap,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="precost != null">
+        precost = #{precost,jdbcType=DECIMAL},
+      </if>
+      <if test="paycost != null">
+        paycost = #{paycost,jdbcType=DECIMAL},
+      </if>
+      <if test="payway != null">
+        payway = #{payway,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="editdate != null">
+        editdate = #{editdate,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null and checkdate != ''">
+        checkdate = #{checkdate,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="deletedate != null and deletedate !='empty'">
+        deletedate = #{deletedate,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedate =='empty'">
+        deletedate = NULL
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.nwc.sys.pojo.Order">
+    update sorder
+    set client = #{client,jdbcType=VARCHAR},
+      projectname = #{projectname,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      vmap = #{vmap,jdbcType=INTEGER},
+      smap = #{smap,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DECIMAL},
+      precost = #{precost,jdbcType=DECIMAL},
+      paycost = #{paycost,jdbcType=DECIMAL},
+      payway = #{payway,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      editdate = #{editdate,jdbcType=VARCHAR},
+      checkdate = #{checkdate,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      isdelete = #{isdelete,jdbcType=INTEGER},
+      deletedate = #{deletedate,jdbcType=VARCHAR}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

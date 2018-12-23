@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.nwc.sys.dao.OrderRecordMapper">
+	<resultMap id="BaseResultMap"
+		type="net.nwc.sys.pojo.OrderRecord">
+		<id column="serialid" jdbcType="INTEGER" property="serialid" />
+		<result column="orderid" jdbcType="INTEGER" property="orderid" />
+		<result column="editor" jdbcType="VARCHAR" property="editor" />
+		<result column="editdate" jdbcType="VARCHAR"
+			property="editdate" />
+		<result column="note" jdbcType="VARCHAR" property="note" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		serialid, orderid, editor, editdate, note
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sorderrecord
+		where serialid = #{serialid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByOrderid" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sorderrecord
+		where orderid = #{orderid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByOrderid" parameterType="java.lang.Integer">
+		delete from sorderrecord
+		where orderid = #{orderid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="net.nwc.sys.pojo.OrderRecord"  useGeneratedKeys="true" keyProperty="serialid">
+		insert into sorderrecord (serialid, orderid, editor,
+		editdate, note)
+		values (#{serialid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER},
+		#{editor,jdbcType=VARCHAR},
+		#{editdate,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+	</insert>
+</mapper>
