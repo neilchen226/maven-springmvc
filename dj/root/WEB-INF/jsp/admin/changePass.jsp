@@ -14,7 +14,6 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" href="/resource/layuicms2.0/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="/resource/layuicms2.0/css/public.css" media="all" />
-<link rel="stylesheet" href="/resource/zmh/css/zmh.css" media="all" />
 </head>
 <body class="childrenBody">
 	<form class="layui-form layui-row changePwd">
@@ -76,7 +75,7 @@
 	    });
 	    form.on('submit(changePwd)', function(data) {
 			console.info("提交数据： " +JSON.stringify(data.field));
-			$.post("/changePass",data.field,function(res){
+			$.post("/sys/user/changePass",data.field,function(res){
 					layer.msg(res.message,{time:2000},function(){
 					if(res.status==200){
 			           

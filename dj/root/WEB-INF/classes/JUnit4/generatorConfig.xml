@@ -2,31 +2,52 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<!-- 数据库驱动包位置 -->
-	<classPathEntry location="D:\devTools\lib\sqlserver\sqljdbc4.jar" />
+	<classPathEntry location="/Users/cheng/git/repository/dj/root/WEB-INF/lib/mybatis-generator-core.jar" />
 	<context id="context1">
 		<commentGenerator>
 			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
-		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		 connectionURL="jdbc:sqlserver://47.90.107.165:1433;DatabaseName=ZMH"
-			userId="sa" password="Zmh4790107165!!@@" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+		 connectionURL="jdbc:mysql://119.29.82.220:3306/dj"
+			userId="root" password="Mysql@123" />
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetProject="ZMH/src/java" targetPackage="net.kingtrans.data.pojo">
+		<javaModelGenerator targetProject="Summer/src/java" targetPackage="net.nwc.sys.pojo">
 			<property name="enableSubPackages" value="true" />
 		</javaModelGenerator>
 		<!-- 生成的映射文件报名和位置 -->
-		<sqlMapGenerator targetProject="ZMH/src/java" targetPackage="net.kingtrans.data.dao">
+		<sqlMapGenerator targetProject="Summer/src/java" targetPackage="net.nwc.sys.dao">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
-		<javaClientGenerator targetProject="ZMH/src/java" targetPackage="net.kingtrans.data.dao" type="XMLMAPPER">
+		<javaClientGenerator targetProject="Summer/src/java" targetPackage="net.nwc.sys.dao" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<table  tableName="ccy_detail" domainObjectName="CcyDetail"
+		<table  tableName="suser" domainObjectName="User"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+	 	</table>
+		<table  tableName="sorder" domainObjectName="Order"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+	 	</table>
+		<table  tableName="sorderrecord" domainObjectName="OrderRecord"
+		 	enableCountByExample="false"
+			enableSelectByExample="false"
+			enableDeleteByExample="false" 
+			enableUpdateByExample="false" 
+			selectByExampleQueryId="false">
+	 	</table>
+		<table  tableName="sworkrecord" domainObjectName="WorkRecord"
 		 	enableCountByExample="false"
 			enableSelectByExample="false"
 			enableDeleteByExample="false" 
@@ -34,20 +55,5 @@
 			selectByExampleQueryId="false">
 	 	</table>
 		
-		<!-- <table  tableName="s_house_cost" domainObjectName="SHouseCost"
-		 	enableCountByExample="false"
-			enableSelectByExample="false"
-			enableDeleteByExample="false" 
-			enableUpdateByExample="false" 
-			selectByExampleQueryId="false">
-		</table> -->
-		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<!-- <table tableName="s_order_track" domainObjectName="SOrderTrack"
-		 	enableCountByExample="false"
-			enableSelectByExample="false"
-			enableDeleteByExample="false" 
-			enableUpdateByExample="false" 
-			selectByExampleQueryId="false">
-		</table> -->
 	</context>
 </generatorConfiguration> 

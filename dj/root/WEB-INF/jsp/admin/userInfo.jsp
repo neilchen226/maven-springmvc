@@ -14,18 +14,17 @@
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" href="/resource/layuicms2.0/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="/resource/layuicms2.0/css/public.css" media="all" />
-<link rel="stylesheet" href="/resource/zmh/css/zmh.css" media="all" />
 </head>
 <body class="childrenBody">
 
 	<form id="userinfo" class="layui-form layui-row">
-		<input type="hidden" name="userFace" value="${user.userFace}">
+		<input type="hidden" name="userface" value="${user.userface}">
 		<div class="layui-col-md3 layui-col-xs12 user_right">
 			<div class="layui-upload-list">
-				<c:if test="${not empty user.userFace }">
-					<img class="layui-upload-img layui-circle userFaceBtn userAvatar" src="${user.userFace}" id="userFace">
+				<c:if test="${not empty user.userface }">
+					<img class="layui-upload-img layui-circle userFaceBtn userAvatar" src="${user.userface}" id="userFace">
 				</c:if>
-				<c:if test="${empty user.userFace }">
+				<c:if test="${empty user.userface }">
 					<img class="layui-upload-img layui-circle userFaceBtn userAvatar" id="userFace">
 				</c:if>
 			</div>
@@ -36,21 +35,31 @@
 		</div>
 		<div class="layui-col-md6 layui-col-xs12" style="margin-top: 40px;">
 			<div class="layui-form-item">
-				<label class="layui-form-label">用户名</label>
+				<label class="layui-form-label">登录名</label>
 				<div class="layui-input-block">
 					<input type="text" value="${user.userid }" disabled class="layui-input layui-disabled">
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">用户组</label>
+				<label class="layui-form-label">职位</label>
 				<div class="layui-input-block">
-					<input type="text" value="${role.rolename }" disabled class="layui-input layui-disabled">
+					<select name="roleid"  disabled class="layui-input  layui-disable">
+					<c:forEach items="${jobnames }" var="i">
+					<option value="${i.code }" <c:if test="${i.code == user.jobname }"> selected</c:if>>${i.name}</option>
+					</c:forEach>
+					</select>
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-block">
 					<input type="text" name="username" value="${user.username }" placeholder="请输入姓名" lay-verify="required" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">代号</label>
+				<div class="layui-input-block">
+					<input type="text" value="${user.usernumber }" disabled class="layui-input layui-disabled">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -74,14 +83,14 @@
 
 		upload.render({
 			elem : '.userFaceBtn',
-			url : '/sys/tuser/uploadUserFace',
+			url : '/sys/user/uploadHeadImg',
 			method : "post",
 			field : 'userFaceField', // 指定该文件上传的字段名
 			accept : "images",
 			done : function(res,index,upload) {
 				if (res.status == 200) {
 					$('.layui-circle,.uploadUserFace').attr('src', res.userFaceUrl);
-					$('#userinfo input[name=userFace]').val(res.userFaceUrl);
+					$('#userinfo input[name=userface]').val(res.userFaceUrl);
 				} else {
 					layer.msg(res.message);
 				}
@@ -94,12 +103,12 @@
 		// 保存
 		form.on('submit(saveUser)', function(data) {
 			console.info("提交数据： " + JSON.stringify(data.field));
-			$.post("/changeUserInfo", data.field, function(res) {
+			$.post("/sys/user/changeUserInfo", data.field, function(res) {
 				layer.msg(res.message, {
 					time : 2000
 				}, function() {
 					if (res.status == 200) {
-
+		
 					}
 				});
 			}, "json");

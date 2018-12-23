@@ -15,18 +15,6 @@
 		http://www.springframework.org/schema/aop   
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-	<!-- Dajie系统配置文件 -->
-	<bean id="zmhProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations">
-			<list>
-				<value>classpath:config/properties/zmh.properties</value>
-			</list>
-		</property>
-		<!-- 设置编码格式 -->
-		<property name="fileEncoding" value="UTF-8"></property>
-	</bean>
-
-
 	<!-- 加载配置文件 -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
@@ -72,6 +60,9 @@
 		<property name="testWhileIdle" value="${druid.testWhileIdle}" />
 		<property name="testOnBorrow" value="${druid.testOnBorrow}" />
 		<property name="testOnReturn" value="${druid.testOnReturn}" />
+		<property name="logAbandoned" value="${druid.logAbandoned}" />
+		<property name="removeAbandoned" value="${druid.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${druid.removeAbandonedTimeout}" />
 	</bean>
 
 	<!-- spring数据源 -->
@@ -101,31 +92,6 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
-	<!-- 配置系统线程 -->
-	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		<!-- 核心线程数 -->
-		<property name="corePoolSize" value="10" />
-		<!-- 最大线程数 -->
-		<property name="maxPoolSize" value="100" />
-		<!-- 队列最大长度 >=mainExecutor.maxSize -->
-		<property name="queueCapacity" value="1000" />
-		<!-- 线程池维护线程所允许的空闲时间 -->
-		<property name="keepAliveSeconds" value="300" />
-		<!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
-		<property name="rejectedExecutionHandler">
-			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
-		</property>
-	</bean>
 	
-	<!-- 缓存 -->
-	<cache:annotation-driven cache-manager="cacheManager" />
-	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-		<property name="caches">
-			<set>
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="tmoduleCache" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="tUserCache" />
-			</set>
-		</property>
-	</bean>
 
 </beans>

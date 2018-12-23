@@ -10,7 +10,7 @@
 	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-fileupload-1.3.1.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="root/WEB-INF/lib/db-druid-1.0.27.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/db-druid-1.0.27.jar" sourcepath="/var/folders/rl/ppfxmxt11j9dph4xq_jt88s80000gn/T/.org.sf.feeling.decompiler1544632422452/source/druid-1.0.27-sources.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/freemarker.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/hamcrest-all-1.3.jar"/>
@@ -44,12 +44,13 @@
 	<classpathentry kind="lib" path="root/WEB-INF/lib/xstream-1.3.1.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/sqljdbc4.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/mybatis-generator-core.jar"/>
-	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-3.9.jar" sourcepath="/var/folders/rl/ppfxmxt11j9dph4xq_jt88s80000gn/T/.org.sf.feeling.decompiler1544632422452/source/poi-3.9-sources.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-ooxml-3.9.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/poi-ooxml-schemas-3.9.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/jsoup-1.9.2.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/jbarcode-0.2.8.jar"/>
 	<classpathentry kind="lib" path="root/WEB-INF/lib/mysql-connector-java-5.1.34-bin.jar"/>
+	<classpathentry kind="lib" path="root/WEB-INF/lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Library/Apache Tomcat/tomcat8080/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="/Library/Apache Tomcat/tomcat8080/lib/servlet-api.jar"/>

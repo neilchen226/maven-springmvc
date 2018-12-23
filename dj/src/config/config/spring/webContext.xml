@@ -62,14 +62,15 @@
 			<mvc:exclude-mapping path="/resource/**" />
 			<mvc:exclude-mapping path="/upload/**" />
 			<mvc:exclude-mapping path="/favicon.ico" />
-			<bean class="net.kingtrans.admin.interceptor.LogonInterceptor"></bean>
+			<bean class="net.nwc.admin.interceptor.LogonInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-	 <!-- spring 异常处理器 -->
+	 <!-- spring 异常处理器
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView" value="/error/error" />
 		<property name="exceptionAttribute" value="ex" />
 	</bean>
+	-->
 </beans>
 

@@ -18,7 +18,7 @@
 	</settings>
 
 	<mappers>
-		<package name="net.kingtrans.*.dao"/>  
+		<package name="net.*.dao"/>  
 	</mappers>
 
 </configuration>
