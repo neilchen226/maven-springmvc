@@ -192,7 +192,7 @@ layui.use(['form','layer','table','laytpl','laydate','multiSelect'],function(){
         		html+="定金合计：<b style='margin-right:5px;'>"+o.precost+"元</b>, ";
         		html+="已付合计：<b style='margin-right:5px;'>"+o.paycost+"元</b> ";
         		html+="</div>";
-        		$("#layui-table-page1").append(html);
+        		$("#layui-table-page1 .layui-laypage-default").append(html);
         	}
         },
         cellMinWidth : 35,
